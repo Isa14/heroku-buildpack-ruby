@@ -30,9 +30,9 @@ class LanguagePack::Rails51 < LanguagePack::Rails5
       instrument "rails51.run_assets_precompile_rake_task" do
         log("assets_precompile") do
           puts "ASSET FILE"
-          puts "#{Dir.glob('public/assets/{.sprockets-manifest-*.json}', File::FNM_DOTMATCH).any?}"
+          puts "#{Dir['public/assets/*']}"
           puts "PACKS FILE"
-          puts "#{Dir.glob('public/assets/{manifest-*.json}', File::FNM_DOTMATCH).any?}"
+          puts "#{Dir['public/assets/{.sprockets-manifest-*.json}']}"
           # if Dir.glob("public/assets/{.sprockets-manifest-*.json,manifest-*.json}", File::FNM_DOTMATCH).any?
           #   puts "Detected manifest file, assuming assets were compiled locally"
           #   return true
