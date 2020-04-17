@@ -40,7 +40,8 @@ class LanguagePack::Rails51 < LanguagePack::Rails5
 
           topic("Preparing app for Rails asset pipeline")
 
-          load_asset_cache
+          # load_asset_cache
+          puts "DO NOT LOAD CACHE"
 
           precompile.invoke(env: rake_env)
 
