@@ -29,6 +29,10 @@ class LanguagePack::Rails51 < LanguagePack::Rails5
     def run_assets_precompile_rake_task
       instrument "rails51.run_assets_precompile_rake_task" do
         log("assets_precompile") do
+          puts "ASSET FILE"
+          puts Dir.glob("public/assets/{.sprockets-manifest-*.json}", File::FNM_DOTMATCH).any?
+          puts "PACKS FILE"
+          puts Dir.glob("public/assets/{manifest-*.json}", File::FNM_DOTMATCH).any?
           # if Dir.glob("public/assets/{.sprockets-manifest-*.json,manifest-*.json}", File::FNM_DOTMATCH).any?
           #   puts "Detected manifest file, assuming assets were compiled locally"
           #   return true
@@ -69,7 +73,7 @@ class LanguagePack::Rails51 < LanguagePack::Rails5
     def load_asset_cache
       puts "Loading asset cache"
       start = Time.now
-      @cache.load public_assets_folder
+      @cache.load_without_overwrite public_assets_folder
       @cache.load default_assets_cache
 
       paths = (self.class::ASSET_PATHS + self.class::ASSET_CACHE_PATHS)
