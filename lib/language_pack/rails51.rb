@@ -46,6 +46,11 @@ class LanguagePack::Rails51 < LanguagePack::Rails5
 
           load_asset_cache
 
+          puts "ASSET FILE"
+          puts "#{Dir['public/assets/*']}"
+          puts "PACKS FILE"
+          puts "#{Dir['public/assets/{.sprockets-manifest-*.json}']}"
+
           precompile.invoke(env: rake_env)
 
           if precompile.success?
