@@ -36,12 +36,11 @@ class LanguagePack::Rails51 < LanguagePack::Rails5
 
           precompile = rake.task("assets:precompile")
           return true unless precompile.is_defined?
-          puts "IS DEFINED"
+          puts "IS DEFINED TEST"
 
           topic("Preparing app for Rails asset pipeline")
 
-          # load_asset_cache
-          puts "DO NOT LOAD CACHE"
+          load_asset_cache
 
           precompile.invoke(env: rake_env)
 
@@ -70,7 +69,7 @@ class LanguagePack::Rails51 < LanguagePack::Rails5
     def load_asset_cache
       puts "Loading asset cache"
       start = Time.now
-      @cache.load_without_overwrite public_assets_folder
+      @cache.load public_assets_folder
       @cache.load default_assets_cache
 
       paths = (self.class::ASSET_PATHS + self.class::ASSET_CACHE_PATHS)
