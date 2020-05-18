@@ -26,12 +26,14 @@ class LanguagePack::Ruby
 
   private
   def db_prepare_test_rake_tasks
-    ["db:test:purge"].map {|name| rake.task(name) }
+    ["db:test:purge", "parallel:create", "parallel:load_structure"].map {|name| rake.task(name) }
   end
 
   def prepare_tests
     rake_tasks = db_prepare_test_rake_tasks.select(&:is_defined?)
+    puts "PREPARE TESTS"
     return true if rake_tasks.empty?
+    puts "PREPARING"
 
     topic "Preparing test database"
     rake_tasks.each do |rake_task|
